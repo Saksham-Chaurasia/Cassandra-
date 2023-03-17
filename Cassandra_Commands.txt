@@ -1,0 +1,105 @@
+Cassandra Commands:
+
+cqlsh> describe keyspaces;
+
+
+cqlsh> create keyspace SampleDemoDb
+   ... with replication = {'class':'SimpleStrategy','replication_factor':3};
+
+ cqlsh>describe sampledemodb;
+
+cqlsh> alter keyspace sampledemodb with replication = {'class':'SimpleStrategy','replication_factor':1};
+
+cqlsh> select * from system_schema.keyspaces;
+
+cqlsh> use sampledemodb;
+
+//creating table emp
+
+cqlsh:sampledemodb> create table emp(
+                ... emp_id int PRIMARY KEY,
+                ... emp_name text,
+                ... emp_city text,
+                ... emp_sal varint,
+                ... emp_phone varint);
+
+
+
+cqlsh:sampledemodb> describe tables;
+
+cqlsh:sampledemodb> select * from emp;
+
+//inserting into table emp
+
+cqlsh:sampledemodb>insert into emp(emp_id,emp_name,emp_city,
+                ... emp_phone,emp_sal) values(2,'Lakshman','Hyderabad',97349879,4
+000);
+cqlsh:sampledemodb>insert into emp(emp_id,emp_name,emp_city,
+                ... emp_phone,emp_sal) values(3,'Anil','Hyderabad',9734933,99000);
+
+cqlsh:sampledemodb>insert into emp(emp_id,emp_name,emp_city,
+                ... emp_phone,emp_sal) values(4,'Jatt','Hyderabad',97343979,99000);
+cqlsh:sampledemodb>insert into emp(emp_id,emp_name,emp_city,
+                ... emp_phone,emp_sal) values(5,'Mark','Delhi',97343579,83000);
+cqlsh:sampledemodb>insert into emp(emp_id,emp_name,emp_city,
+                ... emp_phone,emp_sal) values(6,'Julie','Mumbai',97333979,89000);
+
+
+cqlsh:sampledemodb> select * from emp where emp_id =3;
+
+cqlsh:sampledemodb> delete emp_sal from emp where emp_id = 4;
+
+//updating a table
+update emp set emp_city='Banglore', emp_sal=500000 where emp_id =2 ;
+
+create table dept(
+	dept_id int PRIMARY KEY,
+	dept_name text, 
+	dept_project text,
+	dept_phone varint);
+
+insert into dept(dept_id,dept_name,dept_project,dept_phone)
+values(1,'IT','Recruitment',893479);
+
+insert into dept(dept_id,dept_name,dept_project,dept_phone)
+values(2,'Finance','Coordination',99739845);
+
+insert into dept(dept_id,dept_name,dept_project,dept_phone)
+values(3,'Recruitment','Promote',3893479);
+
+insert into dept(dept_id,dept_name,dept_project,dept_phone)
+values(4,'Marketing','Salaries',9378934);
+
+cqlsh:sampledemodb> truncate dept;
+
+cqlsh:sampledemodb> drop table dept;
+
+//creating a table with list 
+//cql collections demo
+
+create table data(name text PRIMARY KEY, email list<text>);
+
+insert into data(name , email) values('ramu',['pizza@gmail.com','cola@yahoo.com']);
+
+insert into data(name , email) values('meera',['burger@gmail.com','icecream@yahoo.com']);
+
+insert into data(name , email) values('mango',['fries@gmail.com','chips@yahoo.com','maggi@gmail.com']);
+
+insert into data(name , email) values('apple',['noodles@gmail.com','biscuit@yahoo.com']);
+
+
+//Allow Filtering Demo
+
+create table blogs (blogID int,
+	time1 int,
+	time2 int, 
+	author text,
+	content text,
+	PRIMARY KEY(blogID,time1,time2));
+
+ select * from blogs where blogID=1 and time1 =141 and time2
+=145;
+
+cqlsh:sampledemodb> select * from blogs where time1 = 141 ALLOW FILTERING;
+
+

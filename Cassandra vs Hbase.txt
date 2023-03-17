@@ -1,0 +1,41 @@
+Cassandra : 
+Network topology -Peer to peer
+
+Availaibility and Partition -tolerance
+
+Gossip Pattern
+
+
+
+
+Hbase:
+Network Topology - master and slave
+Consistency and Partition-tolerance
+
+Sparsed, sorted map, multi-dimensional distributed, Zookeper
+
+
+
+
+
+Memstore                 Mem-Table
+Hfile                    SStable
+RegionServer             Node
+CP                       AP
+N/w-Master/slave         peer to peer
+Zookeper coordination    Gossip Protocol
+RF3                      RF-3
+Hlog (WAC)               Commit log
+Language Hql             CQl
+Hbase Shell                cass8h- cQsh
+
+Write opeation                Write operation
+put- memstore, WAL(hlog)   memtable, commitlog
+flush memstore-Hfile          SStable
+compact Hfile-Hdfs
+Read operation              REad output
+Scan get                    SStable
+
+Single point of failure in hadoop is Namenode
+Single point of failure in hbase is HMaster
+Single point of failure in cassandra is nothing
